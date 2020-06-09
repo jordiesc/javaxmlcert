@@ -24,7 +24,7 @@ dependencies {
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.2-jre'
     // https://mvnrepository.com/artifact/commons-io/commons-io
-    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    // compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
