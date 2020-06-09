@@ -38,7 +38,7 @@ application {
 
 test {
     // Use junit platform for unit tests
-    useJUnitPlatform()
+    //useJUnitPlatform()
 	testLogging {
 		events "passed", "skipped", "failed"
 		showStandardStreams = true

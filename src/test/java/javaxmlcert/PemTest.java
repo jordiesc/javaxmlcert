@@ -11,21 +11,17 @@ import java.security.cert.X509Certificate;
 import org.junit.Before;
 import org.junit.Test;
 
-class PemTest {
+public class PemTest {
 
 	InputStream inputstream;
 	@Before
-	void loadPemFile() {
+	public void loadPemFile() {
 		inputstream = getClass().getClassLoader().getResourceAsStream("jordi.pem");
 	}
 
-	@Test	
-	void testLoadPemfile(){
-		assertNotNull(inputstream);
-	}
 
 	@Test
-	void testX509() throws Exception{
+	public void testX509() throws Exception{
 			
 		X509Certificate certificate = (X509Certificate) CertificateFactory.getInstance("X509").generateCertificate(inputstream);
 		assertNotNull(certificate);
@@ -34,7 +30,10 @@ class PemTest {
 		String cn = certificate.getSubjectDN().getName();
 		
 		assertTrue(cn.contains("CN=jordi"));
-	}		
+	}
+
+	public PemTest() {
+	}
 }
 
 

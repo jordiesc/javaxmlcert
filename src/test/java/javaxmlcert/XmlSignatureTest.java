@@ -4,12 +4,15 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
-class XmlSignatureTest {
+public class XmlSignatureTest {
 
 	@Test
-	void testXmlDom() {
+	public void testXmlDom() {
 		assertNotNull(XmlUtil.getXmlFromResoureces("school.xml"));	
 		
+	}
+
+	public XmlSignatureTest() {
 	}
 
 }
