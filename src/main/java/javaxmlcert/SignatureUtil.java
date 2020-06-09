@@ -17,6 +17,7 @@ import javax.xml.crypto.dsig.Reference;
 import javax.xml.crypto.dsig.SignatureMethod;
 import javax.xml.crypto.dsig.SignedInfo;
 import javax.xml.crypto.dsig.Transform;
+import javax.xml.crypto.dsig.XMLSignature;
 import javax.xml.crypto.dsig.XMLSignatureFactory;
 import javax.xml.crypto.dsig.dom.DOMSignContext;
 import javax.xml.crypto.dsig.keyinfo.KeyInfo;
@@ -49,16 +50,23 @@ class SignatureUtil {
 					xmlSigFactory.newCanonicalizationMethod(CanonicalizationMethod.INCLUSIVE,
 							(C14NMethodParameterSpec) null),
 					xmlSigFactory.newSignatureMethod(SignatureMethod.RSA_SHA1, null), Collections.singletonList(ref));
-		} catch (NoSuchAlgorithmException ex) {
-			ex.printStackTrace();
-		} catch (InvalidAlgorithmParameterException ex) {
+		//generate the xmlInfo
+			KeyInfo keyInfo = getXmlKeyInfo("jordi.p12", "jordipwd", "jordialias");      
+		//Create a new XML Signature
+			XMLSignature xmlSignature = xmlSigFactory.newXMLSignature(signedInfo, keyInfo);
+
+			xmlSignature.sign(domSignCtx);
+
+			XmlUtil.writeDom(doc);
+
+
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		// Pass the Public Key File Path
-		KeyInfo keyInfo = getXmlKeyInfo("jordi.p12","jordipwd","jordialias");
 		// Create a new XML Signature
-		
-		//XMLSignature xmlSignature = xmlSigFactory.newXMLSignature(signedInfo, );
+
+		// XMLSignature xmlSignature = xmlSigFactory.newXMLSignature(signedInfo, );
 
 		////////////////////// 7
 		//////////////////// 7
@@ -80,7 +88,9 @@ class SignatureUtil {
 	}
 
 	/**
-	 * class represntation KeyInfo wich is a xml representation of the certificate public
+	 * class represntation KeyInfo wich is a xml representation of the certificate
+	 * public
+	 * 
 	 * @param filep12
 	 * @param pwd
 	 * @param alias
@@ -102,7 +112,7 @@ class SignatureUtil {
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-		} 
+		}
 		return keyInfo;
 	}
 }
